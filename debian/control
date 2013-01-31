@@ -1,0 +1,15 @@
+Source: dpprint
+Section: admin
+Priority: extra
+Maintainer: Julien Castets <castets.j@gmail.com>
+Build-Depends: debhelper (>= 8)
+Standards-Version: 3.9.3
+Homepage: https://github.com/brmzkw/dpprint
+Vcs-Git: git://github.com/brmzkw/dpprint
+Vcs-Browser: http://github.com/brmzkw/dpprint
+
+Package: dpprint
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, gawk
+Description: Date prefixed print
+ Read lines on stdin and prefix each of them with the current date.

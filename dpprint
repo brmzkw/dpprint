@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# dpprint - date prefixed print
+#
+# Read lines on stdin and prefix each of them with the current date.
+#
+# To avoid buffering, use stdbuf(1).
+# Example:
+#   stdbuf -o0 long_command | dpprint
+
+set -e
+
+# Defaults
+DATE_FORMAT='[%Y-%m-%d %H:%M:%S] '
+
+usage() {
+    cat <<EOF
+Usage: $(basename $0) [OPTIONS]
+
+Options:
+    -h, --help      Show this message
+    -f, --format    1999 ISO C standard date format
+EOF
+}
+
+ARGS=`getopt -o hf: --long help,format:, -n "$0" -- "$@"`
+eval set -- "$ARGS"
+
+while true ; do
+    case "$1" in
+        -f|--format) DATE_FORMAT="$2" ; shift 2 ;;
+        --) shift ; break ;;
+        *) usage ; exit 1 ;;
+    esac
+done
+
+gawk '{ print strftime("'"${DATE_FORMAT}"'") $0 }'
