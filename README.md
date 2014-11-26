@@ -23,9 +23,14 @@ Example
     [2014-11-26 14:21:24] 4
     [2014-11-26 14:21:25] 5
 
+
 Build
 -----
 
 To build the debian package, run:
 
+    apt-get install devscripts
+    cd dpprint
     debuild -us -uc
+    cd ..
+    dpkg -i dpprint_*.deb
